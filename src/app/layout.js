@@ -3,10 +3,13 @@ import "./globals.css";
 export const metadata = {
   title: "SNAR — Ignite Your Edge",
   description: "Premium sportswear engineered for performance. Designed for champions.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function RootLayout({ children }) {
   return (
@@ -14,7 +17,6 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );

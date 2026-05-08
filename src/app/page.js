@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 
 const PRODUCTS = [
   { id: 1, name: "Performance Tee", price: "₹1,099", colors: ["#111","#00C4D4","#fff"], bg: "linear-gradient(160deg,#0D1520 0%,#1A2535 100%)", label: "NEW" },
@@ -93,12 +94,9 @@ export default function Home() {
     { eyebrow: "UP TO 30% OFF", h1line1: "SALE", h1line2: "NOW", ac: "LIVE", sub: "Selected items on sale.\nGrab yours before they're gone.", cta1: "SHOP SALE", cta2: "ALL PRODUCTS" },
   ];
 
-  const hc = heroContent[heroSlide];
 
   return (
     <>
-
-
       {/* HERO */}
       <section className="hero">
         <div className="hero-slides" style={{ transform: `translateX(-${heroSlide * 100}%)` }}>
@@ -206,76 +204,97 @@ export default function Home() {
 
       {/* CATEGORIES */}
       <section className="cats-section">
-        <div className="section-wrap">
-          <div className="section-header">
-            <div className="section-title">BROWSE BY CATEGORY</div>
-            <a href="#" className="section-link">
-              VIEW ALL CATEGORIES
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
-            </a>
+        <div className="cats-header-row">
+          <div>
+            <div className="cats-eyebrow">What we offer</div>
+            <div className="cats-headline">Shop by <em>Category</em></div>
           </div>
-          <div className="cats-grid">
-            {CATEGORIES.map((cat) => (
-              <div key={cat.name} className="cat-card">
-                <div className="cat-img-wrap">
-                  <img src={cat.image} alt={cat.name} />
-                </div>
-                <div className="cat-info">
-                  <div className="cat-name">{cat.name}</div>
-                </div>
+          <a href="#" className="section-link">
+            View all
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </a>
+        </div>
+
+        <div className="cats-editorial">
+          {/* Featured — Tracksuits */}
+          <a href="#" className="cat-featured">
+            <img src={CATEGORIES[0].image} alt={CATEGORIES[0].name} className="cat-ed-img"/>
+            <div className="cat-ed-overlay"/>
+            <div className="cat-ed-body">
+              <span className="cat-ed-num">01</span>
+              <div className="cat-ed-info">
+                <span className="cat-ed-tag">Featured</span>
+                <div className="cat-ed-name">{CATEGORIES[0].name}</div>
               </div>
+              <div className="cat-ed-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+              </div>
+            </div>
+          </a>
+
+          {/* 2×2 grid */}
+          <div className="cats-sub-grid">
+            {CATEGORIES.slice(1).map((cat, i) => (
+              <a key={cat.name} href="#" className="cat-sub">
+                <img src={cat.image} alt={cat.name} className="cat-ed-img"/>
+                <div className="cat-ed-overlay"/>
+                <div className="cat-sub-body">
+                  <span className="cat-ed-num">0{i + 2}</span>
+                  <div className="cat-sub-name">{cat.name}</div>
+                  <div className="cat-sub-arrow">↗</div>
+                </div>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
+      {/* FEATURED PRODUCTS — COMING SOON */}
       <section className="products-section">
         <div className="section-wrap">
           <div className="section-header">
             <div className="section-title">FEATURED PRODUCTS</div>
-            <a href="#" className="section-link">
-              VIEW ALL PRODUCTS
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
-            </a>
           </div>
-          <div className="products-track-wrap">
-            <div className="products-track" style={{ transform: `translateX(calc(-${trackOffset} * (100% / ${VISIBLE_CARDS} + 1.2rem / ${VISIBLE_CARDS})))` }}>
-              {PRODUCTS.map((p) => (
-                <div key={p.id} className="prod-card">
-                  <div className="prod-img-wrap">
-                    {p.label && (
-                      <div style={{position:"absolute",top:"10px",left:"10px",background:"var(--ac)",color:"var(--bg)",fontSize:".6rem",fontWeight:700,letterSpacing:".1em",padding:".18rem .55rem",zIndex:2}}>{p.label}</div>
-                    )}
-                    <div className="prod-img-placeholder" style={{background:p.bg,width:"100%",height:"100%"}}>
-                      <ProdSVG product={p}/>
-                    </div>
-                  </div>
-                  <div className="prod-colors">
-                    {p.colors.map((c, i) => (
-                      <div key={i} className={`prod-dot${i===0?" active":""}`} style={{background:c}}/>
-                    ))}
-                  </div>
-                  <div className="prod-foot">
-                    <div className="prod-info">
-                      <div className="prod-name">{p.name}</div>
-                      <div className="prod-price">{p.price}</div>
-                    </div>
-                    <button className="prod-cart-btn">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                    </button>
-                  </div>
+          <div className="coming-soon-wrap">
+            {/* blurred ghost cards */}
+            <div className="cs-ghost-row" aria-hidden="true">
+              {[1,2,3,4].map(i => (
+                <div key={i} className="cs-ghost-card">
+                  <div className="cs-ghost-img"/>
+                  <div className="cs-ghost-line w80"/>
+                  <div className="cs-ghost-line w50"/>
                 </div>
               ))}
             </div>
-          </div>
-          <div style={{display:"flex",justifyContent:"center",gap:".7rem",marginTop:"1.5rem"}}>
-            <button className="track-arrow track-prev" style={{position:"static",transform:"none"}} onClick={trackPrev} disabled={trackOffset===0}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15,18 9,12 15,6"/></svg>
-            </button>
-            <button className="track-arrow track-next" style={{position:"static",transform:"none"}} onClick={trackNext} disabled={trackOffset>=MAX_OFFSET}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9,18 15,12 9,6"/></svg>
-            </button>
+            {/* overlay */}
+            <div className="cs-overlay">
+              <div className="cs-badge">NEW COLLECTION</div>
+              <div className="cs-heading">
+                DROPPING<br/><span className="cs-ac">SOON</span>
+              </div>
+              <p className="cs-sub">Our latest performance collection is almost ready.<br/>Be the first to know when it drops.</p>
+              <div className="cs-form">
+                <input className="cs-input" type="email" placeholder="Enter your email to get early access"/>
+                <button className="cs-btn">
+                  NOTIFY ME
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+                </button>
+              </div>
+              <div className="cs-dividers">
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                  Free Shipping
+                </span>
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                  Easy Returns
+                </span>
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Premium Quality
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -360,6 +379,8 @@ export default function Home() {
         </div>
       </div>
 
+      {/* CINEMATIC FOOTER */}
+      <CinematicFooter />
 
     </>
   );
