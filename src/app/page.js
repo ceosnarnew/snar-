@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { CinematicFooter } from "@/components/ui/motion-footer";
+import FlowArt, { FlowSection } from "@/components/ui/story-scroll";
 
 const PRODUCTS = [
   { id: 1, name: "Performance Tee", price: "₹1,099", colors: ["#111","#00C4D4","#fff"], bg: "linear-gradient(160deg,#0D1520 0%,#1A2535 100%)", label: "NEW" },
@@ -9,6 +10,48 @@ const PRODUCTS = [
   { id: 4, name: "Performance Hoodie", price: "₹1,799", colors: ["#111","#00C4D4","#333"], bg: "linear-gradient(160deg,#0D0E18 0%,#15202B 100%)" },
   { id: 5, name: "Active Tee", price: "₹999", colors: ["#fff","#111","#00C4D4"], bg: "linear-gradient(160deg,#1A1A1A 0%,#2A2A2A 100%)" },
   { id: 6, name: "Gym Bag", price: "₹1,299", colors: ["#111","#222","#333"], bg: "linear-gradient(160deg,#0D0E18 0%,#191A24 100%)", label: "NEW" },
+];
+
+const MARQUEE_ITEMS = [
+  "PERFORMANCE", "ENGINEERED", "CHAMPIONS ONLY", "IGNITE YOUR EDGE",
+  "PREMIUM SPORTSWEAR", "BUILT TO WIN", "PUSH YOUR LIMITS", "ELITE QUALITY",
+];
+
+const STATS = [
+  { num: "10K+", label: "Athletes Trust SNAR", icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" },
+  { num: "50+", label: "Performance Products", icon: "M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" },
+  { num: "4.9★", label: "Average Rating", icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" },
+  { num: "99%", label: "Satisfaction Rate", icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3" },
+];
+
+const TESTIMONIALS = [
+  {
+    quote: "SNAR's Performance Tee is unreal. Wore it through a brutal 90-minute training session and it kept me dry the entire time. The fabric feels premium without restricting movement.",
+    name: "Rahul Sharma",
+    role: "Professional Footballer",
+    location: "Mumbai",
+    initials: "RS",
+    rating: 5,
+    product: "Performance Tee",
+  },
+  {
+    quote: "Finally found sportswear that actually lives up to its claims. The Elite Tracksuit fits perfectly and the material quality is on par with international brands — at half the price.",
+    name: "Priya Nair",
+    role: "Marathon Runner",
+    location: "Bangalore",
+    initials: "PN",
+    rating: 5,
+    product: "Elite Tracksuit",
+  },
+  {
+    quote: "I've tried every major brand out there. SNAR hits different. The hoodie is warm but breathable — perfect for early morning runs when it's cold. My go-to now.",
+    name: "Arjun Mehta",
+    role: "CrossFit Athlete",
+    location: "Delhi",
+    initials: "AM",
+    rating: 5,
+    product: "Performance Hoodie",
+  },
 ];
 
 const CATEGORIES = [
@@ -20,51 +63,21 @@ const CATEGORIES = [
 ];
 
 
-
-function ProdSVG({ product }) {
-  const stroke = "rgba(0,196,212,0.5)";
-  const fill = "rgba(0,196,212,0.08)";
-  return (
-    <svg viewBox="0 0 200 240" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-      <rect width="200" height="240" fill="transparent"/>
-      {product.id === 2 || product.id === 4 ? (
-        <>
-          <path d="M50 55 L50 170 L90 170 L100 140 L110 170 L150 170 L150 55Z" fill={fill} stroke={stroke} strokeWidth="1.2"/>
-          <rect x="50" y="55" width="100" height="16" fill="rgba(0,196,212,0.14)" stroke={stroke} strokeWidth="1"/>
-        </>
-      ) : product.id === 6 ? (
-        <>
-          <rect x="35" y="90" width="130" height="100" rx="6" fill={fill} stroke={stroke} strokeWidth="1.2"/>
-          <path d="M60 90 L68 55 L132 55 L140 90" fill="none" stroke={stroke} strokeWidth="1.2"/>
-          <rect x="70" y="90" width="60" height="10" fill="rgba(0,196,212,0.12)" stroke={stroke} strokeWidth="1"/>
-        </>
-      ) : product.id === 3 ? (
-        <>
-          <path d="M62 32 L40 75 L60 82 L60 200 L140 200 L140 82 L160 75 L138 32 Q118 42 100 42 Q82 42 62 32Z" fill={fill} stroke={stroke} strokeWidth="1.2"/>
-          <path d="M62 32 L40 75 L35 70 L35 120 L60 82Z" fill="rgba(0,196,212,0.05)" stroke={stroke} strokeWidth="1"/>
-          <path d="M138 32 L160 75 L165 70 L165 120 L140 82Z" fill="rgba(0,196,212,0.05)" stroke={stroke} strokeWidth="1"/>
-          <path d="M78 32 Q100 24 122 32 L124 52 Q108 60 100 62 Q92 60 76 52Z" fill="rgba(0,196,212,0.15)" stroke={stroke} strokeWidth="1"/>
-        </>
-      ) : (
-        <>
-          <path d="M62 45 L40 90 L62 98 L62 200 L138 200 L138 98 L160 90 L138 45 L118 56 Q100 62 82 56Z" fill={fill} stroke={stroke} strokeWidth="1.2"/>
-          <path d="M82 56 Q100 48 118 56" fill="none" stroke={stroke} strokeWidth="1"/>
-          <line x1="100" y1="62" x2="100" y2="195" stroke="rgba(0,196,212,0.07)" strokeWidth="1"/>
-        </>
-      )}
-    </svg>
-  );
-}
-
 export default function Home() {
   const [heroSlide, setHeroSlide] = useState(0);
-  const [trackOffset, setTrackOffset] = useState(0);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsRef = useRef(null);
 
   const heroTimerRef = useRef(null);
-  const HERO_SLIDES = 3;
-  const VISIBLE_CARDS = 4;
-  const MAX_OFFSET = PRODUCTS.length - VISIBLE_CARDS;
 
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setStatsVisible(true); obs.disconnect(); } }, { threshold: 0.3 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const HERO_SLIDES = 3;
   useEffect(() => {
     heroTimerRef.current = setInterval(() => {
       setHeroSlide(s => (s + 1) % HERO_SLIDES);
@@ -78,10 +91,7 @@ export default function Home() {
     heroTimerRef.current = setInterval(() => setHeroSlide(s => (s + 1) % HERO_SLIDES), 5000);
   };
 
-  const trackPrev = () => setTrackOffset(o => Math.max(0, o - 1));
-  const trackNext = () => setTrackOffset(o => Math.min(MAX_OFFSET, o + 1));
-
-  const heroContent = [
+const heroContent = [
     { eyebrow: "PREMIUM SPORTSWEAR", h1line1: "IGNITE", h1line2: "YOUR", ac: "EDGE", sub: "Engineered for performance.\nDesigned for champions.", cta1: "SHOP NOW", cta2: "EXPLORE COLLECTION",
       features: [
         { title: "BREATHABLE", desc: "Stay cool\nand fresh", icon: "breathable" },
@@ -109,7 +119,15 @@ export default function Home() {
                 }}/>
                 <div style={{position:"absolute",inset:0,background:"linear-gradient(to right,rgba(0,0,0,.85) 35%,rgba(0,0,0,.1) 100%)"}}/>
               </div>
-              <img src="/hero_background.png" className="hero-athlete" alt="Athletes" />
+              <video
+                className="hero-athlete"
+                src="/banner.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+              />
               <div className="hero-content">
                 <div className="hero-eyebrow">{hci.eyebrow}</div>
                 <h1 className="hero-h1">
@@ -202,6 +220,18 @@ export default function Home() {
         </div>
       </div>
 
+      {/* MARQUEE STRIP */}
+      <div className="marquee-wrap" aria-hidden="true">
+        <div className="marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span key={i} className="mq-item">
+              <span className="mq-star">✦</span>
+              <span className="mq-text">{item}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* CATEGORIES */}
       <section className="cats-section">
         <div className="cats-header-row">
@@ -246,6 +276,23 @@ export default function Home() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="stats-section" ref={statsRef}>
+        <div className={`stats-grid${statsVisible ? " stats-visible" : ""}`}>
+          {STATS.map((s, i) => (
+            <div key={i} className="stat-card" style={{ transitionDelay: `${i * 0.1}s` }}>
+              <div className="stat-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d={s.icon}/>
+                </svg>
+              </div>
+              <div className="stat-num">{s.num}</div>
+              <div className="stat-label">{s.label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -338,6 +385,123 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* BRAND STORY — STORY SCROLL */}
+      <FlowArt aria-label="SNAR Brand Story">
+        <FlowSection
+          aria-label="Who we are"
+          style={{ backgroundColor: '#00C4D4', color: '#05050A' }}
+        >
+          <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase' }}>01 — Who we are</p>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,.25)', margin: '2vw 0' }} />
+          <div>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem,12vw,13rem)', fontWeight: 700, lineHeight: .85, letterSpacing: '.02em', textTransform: 'uppercase' }}>
+              Ignite<br />Your<br />Edge
+            </h2>
+          </div>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,.25)', margin: '2vw 0' }} />
+          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,1.6rem)', fontWeight: 400, lineHeight: 1.6 }}>
+            SNAR was built in gyms, on tracks, and in the minds of athletes who refused to settle. We don't make fashion — we engineer performance wear for people who train like it matters.
+          </p>
+        </FlowSection>
+
+        <FlowSection
+          aria-label="The mission"
+          style={{ backgroundColor: '#09090F', color: '#FFFFFF' }}
+        >
+          <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase', color: '#00C4D4' }}>02 — The mission</p>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.12)', margin: '2vw 0' }} />
+          <div>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem,12vw,13rem)', fontWeight: 700, lineHeight: .85, letterSpacing: '.02em', textTransform: 'uppercase' }}>
+              Built<br />To<br />Win
+            </h2>
+          </div>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.12)', margin: '2vw 0' }} />
+          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,1.6rem)', fontWeight: 300, lineHeight: 1.6, color: '#C8CACE' }}>
+            Every stitch, every fabric, every cut is tested under pressure so you perform without limits.
+          </p>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.12)', margin: '2vw 0' }} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3vw' }}>
+            {[
+              { title: 'Breathable Fabric', desc: 'Advanced mesh technology keeps you cool through the hardest sessions.' },
+              { title: 'Quick Dry Tech', desc: 'Moisture-wicking fibres pull sweat away instantly. Stay fresh, stay focused.' },
+              { title: 'Flex Fit Design', desc: 'Four-way stretch that moves with your body — never against it.' },
+            ].map(item => (
+              <div key={item.title} style={{ minWidth: '180px', flex: 1 }}>
+                <p style={{ fontSize: '.75rem', fontWeight: 700, letterSpacing: '.12em', textTransform: 'uppercase', color: '#00C4D4', marginBottom: '.5rem' }}>{item.title}</p>
+                <p style={{ fontSize: 'clamp(.85rem,1.3vw,1rem)', lineHeight: 1.65, color: 'rgba(200,202,206,0.75)' }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.12)', margin: '2vw 0' }} />
+          <p style={{ marginLeft: 'auto', maxWidth: '50ch', textAlign: 'right', fontSize: 'clamp(1rem,2.5vw,1.6rem)', fontWeight: 300, lineHeight: 1.6, color: '#C8CACE' }}>
+            Every product decision starts with one question — does this make athletes better?
+          </p>
+        </FlowSection>
+
+        <FlowSection
+          aria-label="Join the movement"
+          style={{ backgroundColor: '#0D0E15', color: '#FFFFFF' }}
+        >
+          <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase', color: '#00C4D4' }}>03 — Join the movement</p>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.1)', margin: '2vw 0' }} />
+          <div>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem,12vw,13rem)', fontWeight: 700, lineHeight: .85, letterSpacing: '.02em', textTransform: 'uppercase' }}>
+              Train.<br />Dominate.<br />Repeat.
+            </h2>
+          </div>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.1)', margin: '2vw 0' }} />
+          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,1.6rem)', fontWeight: 300, lineHeight: 1.6, color: '#C8CACE' }}>
+            10,000+ athletes already train in SNAR. The collection drops soon — be the first to own it.
+          </p>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.1)', margin: '2vw 0' }} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3vw' }}>
+            {[
+              { num: '10K+', label: 'Athletes training in SNAR' },
+              { num: '50+', label: 'Performance products engineered' },
+              { num: '4.9★', label: 'Average customer rating' },
+            ].map(item => (
+              <div key={item.num} style={{ minWidth: '180px', flex: 1 }}>
+                <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: 'clamp(2rem,4vw,3.5rem)', letterSpacing: '.04em', color: '#00C4D4', lineHeight: 1, marginBottom: '.4rem' }}>{item.num}</p>
+                <p style={{ fontSize: 'clamp(.85rem,1.3vw,1rem)', lineHeight: 1.65, color: 'rgba(200,202,206,0.75)', textTransform: 'uppercase', letterSpacing: '.08em', fontWeight: 500, fontSize: '.75rem' }}>{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </FlowSection>
+      </FlowArt>
+
+      {/* TESTIMONIALS */}
+      <section className="testimonials-section">
+        <div className="testimonials-header">
+          <div className="testimonials-eyebrow">What athletes say</div>
+          <h2 className="testimonials-headline">Trusted by <em>Champions</em></h2>
+          <p className="testimonials-sub">Real reviews from real athletes who train in SNAR every day.</p>
+        </div>
+        <div className="testimonials-grid">
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i} className="tcard">
+              <div className="tcard-top">
+                <div className="tcard-stars">
+                  {Array.from({ length: t.rating }).map((_, si) => (
+                    <svg key={si} width="14" height="14" viewBox="0 0 24 24" fill="var(--ac)" stroke="none">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  ))}
+                </div>
+                <div className="tcard-product">{t.product}</div>
+              </div>
+              <p className="tcard-quote">"{t.quote}"</p>
+              <div className="tcard-footer">
+                <div className="tcard-avatar">{t.initials}</div>
+                <div className="tcard-person">
+                  <div className="tcard-name">{t.name}</div>
+                  <div className="tcard-role">{t.role} · {t.location}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* TRUST BAR */}
       <div className="trust-bar">
