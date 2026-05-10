@@ -1,16 +1,25 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { CinematicFooter } from "@/components/ui/motion-footer";
-import FlowArt, { FlowSection } from "@/components/ui/story-scroll";
+import dynamic from "next/dynamic";
 
-const PRODUCTS = [
-  { id: 1, name: "Performance Tee", price: "₹1,099", colors: ["#111","#00C4D4","#fff"], bg: "linear-gradient(160deg,#0D1520 0%,#1A2535 100%)", label: "NEW" },
-  { id: 2, name: "Training Shorts", price: "₹899", colors: ["#00C4D4","#111","#1a3a1a"], bg: "linear-gradient(160deg,#0A1A18 0%,#003D3D 100%)" },
-  { id: 3, name: "Elite Tracksuit", price: "₹2,499", colors: ["#111","#222","#00C4D4"], bg: "linear-gradient(160deg,#0D0E18 0%,#1A1B28 100%)", label: "HOT" },
-  { id: 4, name: "Performance Hoodie", price: "₹1,799", colors: ["#111","#00C4D4","#333"], bg: "linear-gradient(160deg,#0D0E18 0%,#15202B 100%)" },
-  { id: 5, name: "Active Tee", price: "₹999", colors: ["#fff","#111","#00C4D4"], bg: "linear-gradient(160deg,#1A1A1A 0%,#2A2A2A 100%)" },
-  { id: 6, name: "Gym Bag", price: "₹1,299", colors: ["#111","#222","#333"], bg: "linear-gradient(160deg,#0D0E18 0%,#191A24 100%)", label: "NEW" },
-];
+const CinematicFooter = dynamic(
+  () => import("@/components/ui/motion-footer").then(m => ({ default: m.CinematicFooter })),
+  { ssr: false }
+);
+
+const FlowArt = dynamic(
+  () => import("@/components/ui/story-scroll"),
+  { ssr: false }
+);
+
+// FlowSection inlined to avoid GSAP SSR — no browser APIs used here
+const FlowSection = ({ style = {}, children, 'aria-label': ariaLabel }) => (
+  <section data-flow-section aria-label={ariaLabel} style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
+    <div data-flow-inner className="flow-art-container" style={{ position: 'relative', display: 'flex', minHeight: '100vh', width: '100%', flexDirection: 'column', justifyContent: 'space-between', gap: '1.5rem', padding: 'clamp(2rem,8vw,4rem) 4vw 4vw', transformOrigin: 'bottom left', willChange: 'transform', ...style }}>
+      {children}
+    </div>
+  </section>
+);
 
 const MARQUEE_ITEMS = [
   "PERFORMANCE", "ENGINEERED", "CHAMPIONS ONLY", "IGNITE YOUR EDGE",
@@ -156,13 +165,6 @@ const heroContent = [
                   </div>
                 )}
 
-                <div className="hero-btns">
-                  <a href="#" className="btn-primary">
-                    {hci.cta1}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
-                  </a>
-                  <a href="#" className="btn-outline">{hci.cta2}</a>
-                </div>
               </div>
             </div>
           ))}
@@ -206,7 +208,7 @@ const heroContent = [
           </div>
           <div>
             <div className="feat-title">FREE SHIPPING</div>
-            <div className="feat-desc">On orders over ₹999</div>
+            <div className="feat-desc"></div>
           </div>
         </div>
         <div className="feat-item">
@@ -511,7 +513,7 @@ const heroContent = [
           </div>
           <div>
             <div className="trust-title">Free Shipping</div>
-            <div className="trust-desc">On orders over ₹999</div>
+            <div className="trust-desc"></div>
           </div>
         </div>
         <div className="trust-item">

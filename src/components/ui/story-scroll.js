@@ -5,7 +5,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  try {
+    gsap.registerPlugin(ScrollTrigger);
+  } catch (e) {
+    // Plugin already registered
+  }
+}
 
 export const FlowSection = ({ style = {}, children, 'aria-label': ariaLabel }) => (
   <section
