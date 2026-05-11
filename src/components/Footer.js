@@ -9,8 +9,8 @@ export default function Footer() {
           <div className="fl-logo"><img src="/logo.png" alt="SNAR"/></div>
           <p>SNAR sportswear is built to push your limits and ignite your edge. Every product is a step towards stronger, better you.</p>
           <div className="fl-social">
-            <Link href="#" className="fl-soc">ig</Link>
-            <Link href="#" className="fl-soc">fb</Link>
+            <a href="https://www.instagram.com/snarindia?igsh=MTBsanM0OGgydXJyYw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="fl-soc">ig</a>
+            <a href="https://www.facebook.com/share/1Ku37nYEQW/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="fl-soc">fb</a>
             <Link href="#" className="fl-soc">yt</Link>
             <Link href="#" className="fl-soc">tw</Link>
           </div>
