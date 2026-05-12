@@ -137,6 +137,7 @@ const heroContent = [
                 playsInline
                 preload="auto"
               />
+              <div className="hero-overlay" />
               <div className="hero-content">
                 <div className="hero-eyebrow">{hci.eyebrow}</div>
                 <h1 className="hero-h1">

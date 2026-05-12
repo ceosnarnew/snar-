@@ -40,7 +40,6 @@ img,svg{max-width:100%;height:auto;display:block}
 
 .pill-menu-btn{display:none;border:none;background:transparent;color:var(--white);cursor:pointer;width:36px;height:36px;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;transition:background .2s}
 .pill-menu-btn:hover{background:rgba(255,255,255,.08)}
-.pill-menu-btn span{display:block;width:18px;height:1.5px;background:currentColor;margin:.26rem auto;border-radius:999px}
 
 /* legacy classes kept for mobile overlay */
 .nav-icon-desktop{display:flex}
@@ -59,12 +58,12 @@ img,svg{max-width:100%;height:auto;display:block}
 .hero-slides{display:flex;height:100%;transition:transform .6s cubic-bezier(.77,0,.175,1)}
 .hero-slide{min-width:100%;height:100%;position:relative;display:flex;align-items:center}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(125deg,#050508 0%,#0D0D18 40%,#0A1520 100%)}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.92) 25%,rgba(0,0,0,.55) 55%,rgba(0,0,0,.1) 100%)}
 .hero-athlete{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
 .hero-athlete-placeholder{position:absolute;right:0;top:0;bottom:0;width:65%;background:linear-gradient(135deg,#0D1520 0%,#1A2535 50%,#0A1020 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hero-athlete-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(0,196,212,0.12) 0%,transparent 60%)}
 .hero-athlete-svg{width:100%;height:100%;opacity:.6}
-.hero-content{position:relative;z-index:10;padding:8rem 3.5rem 0;max-width:700px}
+.hero-overlay{position:absolute;inset:0;z-index:5;background:linear-gradient(to right,rgba(0,0,0,.92) 25%,rgba(0,0,0,.55) 55%,rgba(0,0,0,.1) 100%);pointer-events:none}
+.hero-content{position:relative;z-index:10;padding:8rem 3.5rem 0;max-width:850px}
 .hero-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--ac);margin-bottom:1.4rem}
 .hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,8vw,9rem);line-height:.92;letter-spacing:.02em;color:var(--white);margin-bottom:1.6rem}
 .hero-h1 .ac{color:var(--ac)}
@@ -253,12 +252,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 3.5
 .footer-legal a{font-size:.72rem;color:var(--muted2);text-decoration:none;transition:color .2s}
 .footer-legal a:hover{color:var(--muted)}
 
-/* MOBILE BOTTOM NAV — hidden desktop, shown mobile */
-.mobile-bottom-nav{display:none!important}
-@media(max-width:960px){
-  .mobile-bottom-nav{display:flex!important}
-  body{padding-bottom:4.5rem}
-}
+/* MOBILE BOTTOM NAV removed */
 
 /* MARQUEE STRIP */
 @keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -330,19 +324,19 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 3.5
   .pill-logo img{height:30px}
 
   /* hero — keep full-bleed video on tablet too */
-  .hero{height:100svh;min-height:560px}
-  .hero-bg::after{background:linear-gradient(to right,rgba(0,0,0,.9) 30%,rgba(0,0,0,.4) 70%,rgba(0,0,0,.1) 100%)}
-  .hero-content{position:relative;z-index:10;padding:7.5rem 1.5rem 3rem;max-width:100%}
-  .hero-h1{font-size:clamp(3rem,9vw,5.5rem)}
+  .hero{height:100svh;min-height:600px}
+  .hero-slide{align-items:flex-end}
+  .hero-overlay{background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.9) 75%,rgba(0,0,0,1) 100%)}
+  .hero-content{position:relative;z-index:10;padding:6rem 2.5rem 6.5rem;max-width:100%;width:100%}
+  .hero-h1{font-size:clamp(3.5rem,8vw,5.5rem);margin-bottom:1.2rem}
   .hero-sub{max-width:100%}
   .hero-features{gap:1rem}
   .hero-feat-item{flex:1 1 calc(50% - .5rem)}
-  .hero-dots{bottom:1rem}
-  .hero-h1{font-size:clamp(3rem,9vw,5.5rem)}
-  .hero-sub{max-width:100%}
-  .hero-features{gap:1rem}
-  .hero-feat-item{flex:1 1 calc(50% - .5rem)}
-  .hero-dots{bottom:1rem}
+  
+  .hero-arrow{top:auto;bottom:2.5rem;transform:none}
+  .hero-prev{left:2.5rem}
+  .hero-next{right:2.5rem}
+  .hero-dots{bottom:3.3rem}
 
   /* features strip */
   .features-strip{grid-template-columns:repeat(2,1fr);gap:1px;padding:0}
@@ -413,18 +407,27 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:4rem 3.5
   .pill-logo img{height:28px}
 
   /* hero */
-  .hero{height:100svh;min-height:500px}
-  .hero-content{padding:6.5rem 1rem 2.5rem}
-  .hero-eyebrow{margin-bottom:1rem;font-size:.65rem}
-  .hero-h1{font-size:clamp(2.6rem,11vw,4rem);margin-bottom:1rem}
-  .hero-sub{font-size:.88rem;margin-bottom:1.5rem}
-  .hero-btns{flex-direction:column;align-items:stretch;gap:.8rem;margin-bottom:1.5rem}
-  .btn-primary,.btn-outline{justify-content:center;width:100%}
-  .hero-features{gap:.6rem}
-  .hero-feat-item{flex:1 1 100%}
-  .hero-arrow{width:36px;height:36px}
-  .hero-prev{left:.8rem}
-  .hero-next{right:.8rem}
+  .hero{height:100svh;min-height:620px}
+  .hero-slide{align-items:flex-end}
+  .hero-overlay{background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.9) 70%,rgba(0,0,0,1) 100%)}
+  .hero-content{padding:4rem 1.5rem 4rem;width:100%}
+  .hero-eyebrow{margin-bottom:.8rem;font-size:.65rem}
+  .hero-h1{font-size:clamp(2.6rem,11vw,4rem);margin-bottom:.8rem}
+  .hero-sub{font-size:.85rem;margin-bottom:1.5rem}
+  .hero-btns{flex-direction:column;align-items:stretch;gap:.8rem;margin-bottom:0}
+  .btn-primary,.btn-outline{justify-content:center;width:100%;font-size:.75rem;padding:.7rem 1.5rem}
+  
+  .hero-features{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.5rem}
+  .hero-feat-item{flex:none;align-items:flex-start;gap:.5rem}
+  .hero-feat-icon{width:28px;height:28px}
+  .hero-feat-icon svg{width:14px;height:14px}
+  .hero-feat-title{font-size:.65rem;margin-bottom:.1rem}
+  .hero-feat-desc{font-size:.6rem;line-height:1.2}
+
+  .hero-arrow{top:auto;bottom:1.5rem;transform:none;width:36px;height:36px}
+  .hero-prev{left:1.5rem}
+  .hero-next{right:1.5rem}
+  .hero-dots{bottom:2.3rem}
 
   /* features strip */
   .features-strip{grid-template-columns:1fr}

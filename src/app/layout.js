@@ -10,7 +10,6 @@ export const metadata = {
 };
 
 import Navbar from "@/components/Navbar";
-import BottomNavBar from "@/components/ui/bottom-nav-bar";
 
 export default function RootLayout({ children }) {
   return (
@@ -18,7 +17,6 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
-        <BottomNavBar />
       </body>
     </html>
   );
