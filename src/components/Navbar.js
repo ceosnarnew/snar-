@@ -1,6 +1,69 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
+
+function SpotlightLink({ href, children }) {
+  const wrapRef = useRef(null);
+  const [hovered, setHovered] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const timerRef = useRef(null);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!wrapRef.current) return;
+    const rect = wrapRef.current.getBoundingClientRect();
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
+
+  const handleClick = useCallback(() => {
+    setClicked(true);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setClicked(false), 700);
+  }, []);
+
+  const spotSize = clicked ? 90 : 65;
+  const glowOpacity = clicked ? 0.32 : hovered ? 0.14 : 0;
+
+  return (
+    <span
+      ref={wrapRef}
+      style={{ position: "relative", display: "inline-flex", borderRadius: "8px", overflow: "hidden" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          position: "absolute", inset: 0, borderRadius: "inherit", pointerEvents: "none",
+          background: `radial-gradient(${spotSize}px ${spotSize}px at ${pos.x}px ${pos.y}px, rgba(0,196,212,${glowOpacity}), transparent)`,
+          boxShadow: clicked ? "inset 0 0 14px rgba(0,196,212,0.18)" : "none",
+          transition: clicked ? "box-shadow 0.3s" : "background 0.15s, box-shadow 0.3s",
+        }}
+      />
+      <Link href={href} className="pill-link" style={{ position: "relative", zIndex: 1 }}>
+        {children}
+      </Link>
+    </span>
+  );
+}
+
+function LiquidGlassFilter() {
+  return (
+    <svg style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+      <defs>
+        <filter id="pill-liquid-glass" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.04 0.04" numOctaves="1" seed="2" result="turbulence" />
+          <feGaussianBlur in="turbulence" stdDeviation="1.5" result="blurredNoise" />
+          <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="55" xChannelSelector="R" yChannelSelector="B" result="displaced" />
+          <feGaussianBlur in="displaced" stdDeviation="3.5" result="finalBlur" />
+          <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
 
 const CHEVRON = (
   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.55 }}>
@@ -32,6 +95,7 @@ export default function Navbar() {
 
   return (
     <>
+      <LiquidGlassFilter />
       {/* TOPBAR */}
       <div className="topbar topbar-minimal">
         <div className="topbar-right" style={{marginLeft:"auto", display:"flex", gap:"1.5rem", alignItems:"center"}}>
@@ -57,12 +121,14 @@ export default function Navbar() {
       {/* FLOATING PILL NAV */}
       <div className="pill-nav-wrap">
         <nav className={`pill-nav${scrolled ? " pill-scrolled" : ""}`}>
+          {/* Liquid glass distortion layer */}
+          <div className="pill-liquid-layer" />
           {/* LEFT LINKS */}
           <div className="pill-group pill-left">
             {LEFT_LINKS.map(l => (
-              <Link key={l.href} href={l.href} className="pill-link">
+              <SpotlightLink key={l.href} href={l.href}>
                 {l.label}{l.chevron && CHEVRON}
-              </Link>
+              </SpotlightLink>
             ))}
           </div>
 
@@ -74,9 +140,9 @@ export default function Navbar() {
           {/* RIGHT LINKS */}
           <div className="pill-group pill-right">
             {RIGHT_LINKS.map(l => (
-              <Link key={l.href} href={l.href} className="pill-link">
+              <SpotlightLink key={l.href} href={l.href}>
                 {l.label}{l.chevron && CHEVRON}
-              </Link>
+              </SpotlightLink>
             ))}
 
             {/* Mobile hamburger */}

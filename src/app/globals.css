@@ -14,7 +14,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);over
 img,svg{max-width:100%;height:auto;display:block}
 
 /* TOP BAR — fixed, sits above pill nav */
-.topbar{position:fixed;top:0;left:0;right:0;z-index:210;background:#000;padding:.45rem 3.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.05)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:210;background:rgba(5,5,10,0.45);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);padding:.45rem 3.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.07)}
 .topbar-left{font-size:.72rem;color:var(--off);letter-spacing:.05em}
 .topbar-left span{color:var(--ac);font-weight:600;margin-right:.3rem}
 .topbar-right{display:flex;gap:1.8rem}
@@ -24,8 +24,10 @@ img,svg{max-width:100%;height:auto;display:block}
 
 /* FLOATING PILL NAV */
 .pill-nav-wrap{position:fixed;top:34px;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:.6rem 1rem;pointer-events:none}
-.pill-nav{pointer-events:all;display:flex;align-items:center;gap:0;background:rgba(9,9,15,0.88);border:1px solid rgba(255,255,255,0.1);border-radius:999px;padding:8px 10px;backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04) inset;transition:background .3s,box-shadow .3s;min-width:0}
-.pill-scrolled{background:rgba(9,9,15,0.97);box-shadow:0 8px 40px rgba(0,0,0,.6)}
+.pill-nav{pointer-events:all;position:relative;display:flex;align-items:center;gap:0;background:rgba(9,9,15,0.28);border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:8px 10px;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);box-shadow:0 0 8px rgba(0,0,0,0.03),0 2px 6px rgba(0,0,0,0.08),inset 3px 3px 0.5px -3.5px rgba(255,255,255,0.09),inset -3px -3px 0.5px -3.5px rgba(255,255,255,0.85),inset 1px 1px 1px -0.5px rgba(255,255,255,0.6),inset -1px -1px 1px -0.5px rgba(255,255,255,0.6),inset 0 0 6px 6px rgba(255,255,255,0.12),inset 0 0 2px 2px rgba(255,255,255,0.06),0 0 12px rgba(0,0,0,0.15);transition:background .3s,box-shadow .3s,border-color .3s;min-width:0;overflow:hidden}
+.pill-liquid-layer{position:absolute;inset:0;z-index:0;border-radius:999px;overflow:hidden;pointer-events:none;backdrop-filter:url("#pill-liquid-glass");-webkit-backdrop-filter:url("#pill-liquid-glass")}
+.pill-nav>*:not(.pill-liquid-layer){position:relative;z-index:1}
+.pill-scrolled{background:rgba(9,9,15,0.58);border-color:rgba(255,255,255,0.18);box-shadow:0 8px 40px rgba(0,0,0,.55),inset 1px 1px 1px -0.5px rgba(255,255,255,0.5),inset -1px -1px 1px -0.5px rgba(255,255,255,0.5),inset 0 0 6px 6px rgba(255,255,255,0.1)}
 
 .pill-group{display:flex;align-items:center;gap:2px}
 .pill-link{display:inline-flex;align-items:center;gap:4px;color:rgba(200,202,206,.7);text-decoration:none;font-size:.76rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:.55rem 1rem;border-radius:999px;transition:color .2s,background .2s;white-space:nowrap}

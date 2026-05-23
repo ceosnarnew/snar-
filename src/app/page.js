@@ -130,7 +130,7 @@ const heroContent = [
               </div>
               <video
                 className="hero-athlete"
-                src="/banner.mp4"
+                src={["/banner.mp4", "/banner_1.mp4", "/banner_2.mp4"][idx]}
                 autoPlay
                 loop
                 muted
