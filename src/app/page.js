@@ -12,7 +12,6 @@ const FlowArt = dynamic(
   { ssr: false }
 );
 
-// FlowSection inlined to avoid GSAP SSR — no browser APIs used here
 const FlowSection = ({ style = {}, children, 'aria-label': ariaLabel }) => (
   <section data-flow-section aria-label={ariaLabel} style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
     <div data-flow-inner className="flow-art-container" style={{ position: 'relative', display: 'flex', minHeight: '100vh', width: '100%', flexDirection: 'column', justifyContent: 'space-between', gap: '1.5rem', padding: 'clamp(2rem,8vw,4rem) 4vw 4vw', transformOrigin: 'bottom left', willChange: 'transform', ...style }}>
@@ -128,15 +127,10 @@ const heroContent = [
                 }}/>
                 <div style={{position:"absolute",inset:0,background:"linear-gradient(to right,rgba(0,0,0,.85) 35%,rgba(0,0,0,.1) 100%)"}}/>
               </div>
-              <video
-                className="hero-athlete"
-                src={["/banner.mp4", "/banner_1.mp4", "/banner_2.mp4"][idx]}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-              />
+              {idx === 1
+                ? <img className="hero-athlete" src="/banner_1.png" alt="" style={{objectFit:"cover"}} />
+                : <video className="hero-athlete" src={idx === 0 ? "/banner.mp4" : "/banner_2.mp4"} autoPlay loop muted playsInline preload="auto" />
+              }
               <div className="hero-overlay" />
               <div className="hero-content">
                 <div className="hero-eyebrow">{hci.eyebrow}</div>
@@ -393,24 +387,34 @@ const heroContent = [
       <FlowArt aria-label="SNAR Brand Story">
         <FlowSection
           aria-label="Who we are"
-          style={{ backgroundColor: '#00C4D4', color: '#05050A' }}
+          style={{
+            backgroundImage: 'linear-gradient(to bottom right, rgba(0,0,0,0.72) 0%, rgba(0,196,212,0.45) 100%), url("/Climber.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center top',
+            color: '#fff',
+          }}
         >
-          <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase' }}>01 — Who we are</p>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,.25)', margin: '2vw 0' }} />
+          <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase', color: '#00C4D4' }}>01 — Who we are</p>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.2)', margin: '2vw 0' }} />
           <div>
             <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3.5rem,12vw,13rem)', fontWeight: 700, lineHeight: .85, letterSpacing: '.02em', textTransform: 'uppercase' }}>
               Ignite<br />Your<br />Edge
             </h2>
           </div>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,.25)', margin: '2vw 0' }} />
-          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,1.6rem)', fontWeight: 400, lineHeight: 1.6 }}>
+          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.2)', margin: '2vw 0' }} />
+          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,1.6rem)', fontWeight: 400, lineHeight: 1.6, color: 'rgba(255,255,255,0.85)' }}>
             SNAR was built in gyms, on tracks, and in the minds of athletes who refused to settle. We don't make fashion — we engineer performance wear for people who train like it matters.
           </p>
         </FlowSection>
 
         <FlowSection
           aria-label="The mission"
-          style={{ backgroundColor: '#09090F', color: '#FFFFFF' }}
+          style={{
+            backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.82) 40%, rgba(0,0,0,0.45) 100%), url("/Runner.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+            color: '#FFFFFF',
+          }}
         >
           <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase', color: '#00C4D4' }}>02 — The mission</p>
           <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.12)', margin: '2vw 0' }} />
@@ -444,7 +448,12 @@ const heroContent = [
 
         <FlowSection
           aria-label="Join the movement"
-          style={{ backgroundColor: '#0D0E15', color: '#FFFFFF' }}
+          style={{
+            backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.82) 40%, rgba(0,0,0,0.45) 100%), url("/Basketball.png")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+            color: '#FFFFFF',
+          }}
         >
           <p style={{ fontSize: '.7rem', fontWeight: 700, letterSpacing: '.2em', textTransform: 'uppercase', color: '#00C4D4' }}>03 — Join the movement</p>
           <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,.1)', margin: '2vw 0' }} />

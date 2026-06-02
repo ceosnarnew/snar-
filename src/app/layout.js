@@ -10,6 +10,7 @@ export const metadata = {
 };
 
 import Navbar from "@/components/Navbar";
+import ChatBot from "@/components/ui/chat-bot";
 
 export default function RootLayout({ children }) {
   return (
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
       <body>
         <Navbar />
         {children}
+        <ChatBot />
       </body>
     </html>
   );

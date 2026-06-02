@@ -11,6 +11,7 @@ export default function Footer() {
           <div className="fl-social">
             <a href="https://www.instagram.com/snarindia?igsh=MTBsanM0OGgydXJyYw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="fl-soc">ig</a>
             <a href="https://www.facebook.com/share/1Ku37nYEQW/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="fl-soc">fb</a>
+            <a href="https://wa.me/919875607634" target="_blank" rel="noopener noreferrer" className="fl-soc">wa</a>
             <Link href="#" className="fl-soc">yt</Link>
             <Link href="#" className="fl-soc">tw</Link>
           </div>

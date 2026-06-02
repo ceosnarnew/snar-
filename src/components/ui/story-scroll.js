@@ -6,11 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 if (typeof window !== 'undefined') {
-  try {
-    gsap.registerPlugin(ScrollTrigger);
-  } catch (e) {
-    // Plugin already registered
-  }
+  try { gsap.registerPlugin(ScrollTrigger); } catch (e) {}
 }
 
 export const FlowSection = ({ style = {}, children, 'aria-label': ariaLabel }) => (
@@ -102,11 +98,7 @@ const FlowArt = ({ children, 'aria-label': ariaLabel = 'Story scroll' }) => {
   );
 
   return (
-    <div
-      ref={containerRef}
-      aria-label={ariaLabel}
-      style={{ width: '100%', overflowX: 'hidden' }}
-    >
+    <div ref={containerRef} aria-label={ariaLabel} style={{ width: '100%', overflowX: 'hidden' }}>
       {children}
     </div>
   );
