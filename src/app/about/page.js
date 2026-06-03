@@ -11,31 +11,31 @@ const DIFFERENTIATORS = [
   {
     num: "01",
     title: "Precision-Driven Design",
-    desc: "Every stitch, cut, and fit is developed with movement in mind — maximum flexibility and comfort without compromising style.",
+    desc: "Every cut, stitch, and fit is carefully crafted to support natural movement, delivering exceptional comfort and flexibility.",
     icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
   },
   {
     num: "02",
     title: "Premium Performance Fabrics",
-    desc: "Carefully selected materials — lightweight, breathable, durable — designed to keep up with the most demanding routines.",
+    desc: "High-quality materials — lightweight, breathable, durable — built to withstand demanding training sessions and everyday wear.",
     icon: "M13 2L3 14h9l-1 8 10-12h-9l1-8z",
   },
   {
     num: "03",
     title: "Athlete-Inspired Innovation",
-    desc: "Products influenced by real sporting experiences, not just trends. We understand what athletes need because we've been there ourselves.",
+    desc: "Designed from real sporting experience — not just fashion trends — ensuring practical performance where it matters most.",
     icon: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75",
   },
   {
     num: "04",
     title: "Confidence in Every Move",
-    desc: "SNAR is designed to help you feel prepared, focused, and ready to perform — on the field, in the gym, or navigating everyday challenges.",
+    desc: "When you feel comfortable and prepared, you perform better. SNAR apparel is designed to help you train, compete, and live with confidence.",
     icon: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z",
   },
   {
     num: "05",
-    title: "Modern Style Meets Function",
-    desc: "Performance wear should look as exceptional as it performs. SNAR bridges the gap between sportswear and contemporary lifestyle fashion.",
+    title: "Performance Meets Style",
+    desc: "SNAR combines cutting-edge functionality with contemporary design for a premium athletic lifestyle that looks as good as it performs.",
     icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
   },
 ];
@@ -49,11 +49,12 @@ const STATS = [
 
 const EDGE_ITEMS = [
   "Premium Quality Without Compromise",
-  "Designed by Athletes, Tested by Movement",
-  "Engineered for Comfort and Endurance",
-  "Contemporary Fits for Today's Generation",
-  "Built for Training, Competition, and Everyday Life",
-  "Performance-First. Style-Always.",
+  "Designed by Athletes",
+  "Engineered for Performance & Comfort",
+  "Breathable, Durable & Lightweight Fabrics",
+  "Modern Fits for Today's Generation",
+  "Built for Training, Competition & Everyday Life",
+  "Performance First. Style Always.",
 ];
 
 const CRAFT_POINTS = [
@@ -131,10 +132,10 @@ export default function AboutPage() {
               borderLeft: "2px solid rgba(0,196,212,0.2)", paddingLeft: "1.5rem",
             }}>
               <p style={{ fontSize: "clamp(.9rem, 1.3vw, 1.05rem)", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", fontWeight: 300, maxWidth: "50ch" }}>
-                SNAR was founded with a simple yet powerful vision: to create premium sportswear that performs as hard as the people who wear it. As a sportsperson himself, the founder experienced firsthand the challenges athletes face — uncomfortable fabrics, poor fits, limited mobility, and gear that looked good but couldn't keep up.
+                At SNAR, performance isn't just a feature — it's our foundation. Born from real athletic experience, SNAR was created to redefine what sportswear should be. Our founder, an athlete himself, understood the frustrations of apparel that restricted movement, lacked comfort, or failed to perform when it mattered most.
               </p>
               <p style={{ fontSize: "clamp(.9rem, 1.3vw, 1.05rem)", lineHeight: 1.75, color: "rgba(255,255,255,0.6)", fontWeight: 300, maxWidth: "50ch" }}>
-                Born in Kolkata, SNAR was created for a generation that refuses to choose between performance and style. After all, the right sportswear may not run the extra mile for you — but it should never be the reason you can't.
+                Determined to create something better, he built SNAR with one clear mission: to deliver premium sportswear that empowers athletes to perform at their best while looking their best. Founded in Kolkata, SNAR represents a new generation of sportswear — where innovation, comfort, performance, and style come together seamlessly.
               </p>
               <p style={{ fontSize: ".78rem", fontWeight: 700, letterSpacing: ".15em", textTransform: "uppercase", color: "var(--ac)", marginTop: ".5rem" }}>
                 Ignite Your Edge — Move Sharper. Train Harder. Look Stronger.
@@ -218,7 +219,7 @@ export default function AboutPage() {
               At SNAR, performance is not an option — it is the starting point. Every product is thoughtfully designed to support athletes, fitness enthusiasts, and everyday achievers who demand more from what they wear.
             </p>
             <p style={{ fontSize: "clamp(.95rem, 1.3vw, 1.05rem)", lineHeight: 1.85, color: "rgba(255,255,255,0.5)", fontWeight: 300, maxWidth: "46ch" }}>
-              Whether you're training for competition, pushing through a workout, or simply embracing an active lifestyle — SNAR is built to move with you, not against you. We create apparel that combines functionality, comfort, and modern aesthetics, ensuring you look as confident as you feel.
+              Whether you're training for competition, pushing through a workout, or embracing an active lifestyle — SNAR is engineered to move with you. Every product is designed to provide maximum comfort, unrestricted mobility, reliable performance, and modern athletic style. Because when you're focused on your goals, your sportswear should never hold you back.
             </p>
           </div>
 
@@ -445,13 +446,13 @@ export default function AboutPage() {
 
             <div style={{ paddingTop: "1rem" }}>
               <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.12rem)", lineHeight: 1.85, color: "rgba(255,255,255,0.55)", fontWeight: 300, marginBottom: "1.75rem" }}>
-                We envision SNAR becoming a leading premium sportswear brand that inspires a culture of movement, discipline, and self-belief. Our mission is to empower individuals to pursue their goals with confidence, challenge their limits, and embrace an active lifestyle without sacrificing personal style.
+                To become a leading sportswear brand that inspires a culture of movement, discipline, confidence, and self-improvement. We aim to empower athletes, fitness enthusiasts, and everyday performers to push their limits, embrace challenges, and pursue their goals with unwavering confidence.
               </p>
               <p style={{ fontSize: "clamp(1rem, 1.5vw, 1.12rem)", lineHeight: 1.85, color: "rgba(255,255,255,0.55)", fontWeight: 300, marginBottom: "2.5rem" }}>
                 Because at SNAR, performance is more than physical ability — it's an attitude. High-performance, responsibly made sportswear accessible across India and beyond.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: ".75rem" }}>
-                {["Movement", "Discipline", "Self-Belief", "Performance", "Style"].map((tag) => (
+                {["Movement", "Discipline", "Confidence", "Performance", "Self-Improvement"].map((tag) => (
                   <span key={tag} style={{
                     padding: ".35rem .9rem",
                     background: "rgba(0,196,212,0.07)",
@@ -498,6 +499,13 @@ export default function AboutPage() {
               Every SNAR product is created with one purpose:
             </p>
             <p style={{
+              maxWidth: "52ch", margin: "0 auto 1rem",
+              fontSize: "clamp(1rem, 1.6vw, 1.15rem)",
+              lineHeight: 1.85, color: "rgba(255,255,255,0.4)", fontWeight: 300,
+            }}>
+              From the gym to the field, from training sessions to everyday life, SNAR is built to support your journey.
+            </p>
+            <p style={{
               maxWidth: "52ch", margin: "0 auto 3rem",
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "clamp(1.5rem, 3vw, 2.8rem)",
@@ -514,7 +522,7 @@ export default function AboutPage() {
               borderRadius: "100px",
             }}>
               <span style={{ fontSize: ".72rem", fontWeight: 700, letterSpacing: ".18em", textTransform: "uppercase", color: "var(--ac)" }}>
-                Built by an athlete. Crafted for performers. Worn by those who never settle.
+                Built by Athletes. Crafted for Performers. Worn by Those Who Never Settle.
               </span>
             </div>
           </div>
