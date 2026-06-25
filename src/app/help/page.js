@@ -221,23 +221,72 @@ export default function HelpPage() {
         >
           Send us an email and we'll get back to you as soon as possible.
         </p>
-        <a
-          href="mailto:support@snar.co.in"
-          style={{
-            display: "inline-block",
-            color: "#00C4D4",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "1.1rem",
-            fontWeight: "700",
-            textDecoration: "none",
-            letterSpacing: "0.04em",
-            borderBottom: "2px solid #00C4D4",
-            paddingBottom: "2px",
-            marginBottom: "16px",
-          }}
-        >
-          support@snar.co.in
-        </a>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center", marginBottom: "24px" }}>
+          <a
+            href="mailto:info@snar.co.in"
+            style={{
+              display: "inline-block",
+              color: "#00C4D4",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+              borderBottom: "2px solid #00C4D4",
+              paddingBottom: "2px",
+            }}
+          >
+            info@snar.co.in (Support info )
+          </a>
+          <a
+            href="mailto:info@snar.co.in"
+            style={{
+              display: "inline-block",
+              color: "#00C4D4",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+              borderBottom: "2px solid #00C4D4",
+              paddingBottom: "2px",
+            }}
+          >
+            info@snar.co.in (General Info)
+          </a>
+          <a
+            href="mailto:marketing@snar.co.in"
+            style={{
+              display: "inline-block",
+              color: "#00C4D4",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+              borderBottom: "2px solid #00C4D4",
+              paddingBottom: "2px",
+            }}
+          >
+            marketing@snar.co.in (Marketing)
+          </a>
+          <a
+            href="mailto:finance@snar.co.in"
+            style={{
+              display: "inline-block",
+              color: "#00C4D4",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              textDecoration: "none",
+              letterSpacing: "0.04em",
+              borderBottom: "2px solid #00C4D4",
+              paddingBottom: "2px",
+            }}
+          >
+            finance@snar.co.in (Finance)
+          </a>
+        </div>
         <p
           style={{
             color: "#6b7280",
